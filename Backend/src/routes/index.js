@@ -13,4 +13,18 @@ router.get('/', (req, res)=>{
         })
 })
 
+router.get('/PAROIMPAR/:numero',(req,res)=> {
+    var response = req.params.numero;
+    var resultado = Verificar(response);
+    if (resultado == true){
+        res.json({Resultado: 'El numero es par'})
+    }else {
+        res.json({Resultado: 'El numero es impar'})
+    } 
+});
+
+
+function Verificar(numero){
+    return (numero % 2) == 0;
+}
 export default router 

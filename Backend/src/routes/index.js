@@ -89,7 +89,7 @@ app.get('/potencia/:base', function(req, res) {
         mensaje: Math.pow(base, 3)
     })  
 })
-  
+
 
 app.get('/multiplicacion/:numero1/:numero2', function(req, res) { 
     let numero1 = req.params.numero1;

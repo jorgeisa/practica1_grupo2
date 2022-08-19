@@ -75,7 +75,16 @@ router.get('/raiz/:numero', function(req, res) {
 
 
 function raiz(numero){
-    return Math.cbrt(numero)
+    let resultado;
+    let positivo = 'Numero positivo';
+    resultado = Math.cbrt(numero)
+
+    if(resultado <0){
+        positivo = 'Numero negativo';
+        return [resultado,positivo];
+    }else{
+        return [resultado,positivo]
+    }
 }
 
 //Funcion division
@@ -90,7 +99,7 @@ router.get('/division/:numero1/:numero2', function(req, res) {
 })
 
 function div(n1,n2){
-    return n1/n2;
+    return [n1/n2,n1%n2];
   }
 
 // Funcion Fibonacci
@@ -103,13 +112,18 @@ function fibonacci_func(numero){
 
 function alreves(cadena){
     var resultado = '';
-    
+    var palindromo = 'false';
 
     for(let i = cadena.length -1; i>=0; --i){
         resultado += cadena[i];
     }
 
-    return resultado;
+    if(cadena == resultado){//
+        palindromo = true;
+        return [resultado,palindromo];
+    }else{
+        return [resultado,palindromo];
+    }
 }
 
 router.get('/potencia/:base', function(req, res) { 

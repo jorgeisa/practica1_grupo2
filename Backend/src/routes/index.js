@@ -49,6 +49,20 @@ router.get('/fibo/:numero', (req, res)=> {
     )
 })
 
+// FUncion Raiz
+app.get('/raiz/:numero', function(req, res) { 
+    let result_raiz = raiz(req.params.numero);
+
+    res.json({ 
+        mensaje: result_raiz
+    })  
+})
+
+function raiz(numero){
+    return Math.cbrt(numero)
+}
+
+
 // Funcion Fibonacci
 function fibonacci_func(numero){
     if (numero <= 1) return numero

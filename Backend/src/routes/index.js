@@ -59,7 +59,7 @@ function fibonacci_func(numero){
 
 function alreves(cadena){
     var resultado = '';
-    //var palindromo = 'false';
+    
 
     for(let i = cadena.length -1; i>=0; --i){
         resultado += cadena[i];

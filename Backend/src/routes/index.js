@@ -27,4 +27,25 @@ router.get('/PAROIMPAR/:numero',(req,res)=> {
 function Verificar(numero){
     return (numero % 2) == 0;
 }
+
+// Endpoint Fibonacci
+router.get('/fibo/:numero', (req, res)=> {
+    let numero = req.params.numero
+    var fibonacci_numero = fibonacci_func(numero);
+    res.json(
+        {
+            Funcion: 'Fibonacci',
+            Numero: numero,
+            Fibonacci: fibonacci_numero
+        }
+    )
+})
+
+// Funcion Fibonacci
+function fibonacci_func(numero){
+    if (numero <= 1) return numero
+
+    return fibonacci_func(numero-1) + fibonacci_func(numero - 2)
+}
+
 export default router 

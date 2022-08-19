@@ -23,8 +23,49 @@ router.get('/PAROIMPAR/:numero',(req,res)=> {
     } 
 });
 
+router.get('/alreves/:palabra', function(req, res) { 
+    let cadenaAlreves = alreves(req.params.palabra);
+
+    res.json({ 
+        mensaje: req.params.palabra +' = ' +cadenaAlreves
+    })  
+})
 
 function Verificar(numero){
     return (numero % 2) == 0;
 }
+
+// Endpoint Fibonacci
+router.get('/fibo/:numero', (req, res)=> {
+    let numero = req.params.numero
+    var fibonacci_numero = fibonacci_func(numero);
+    res.json(
+        {
+            Funcion: 'Fibonacci',
+            Numero: numero,
+            Fibonacci: fibonacci_numero
+        }
+    )
+})
+
+// Funcion Fibonacci
+function fibonacci_func(numero){
+    if (numero <= 1) return numero
+
+    return fibonacci_func(numero-1) + fibonacci_func(numero - 2)
+}
+
+
+function alreves(cadena){
+    var resultado = '';
+    //var palindromo = 'false';
+
+    for(let i = cadena.length -1; i>=0; --i){
+        resultado += cadena[i];
+    }
+
+    return resultado;
+}
+
+
 export default router 

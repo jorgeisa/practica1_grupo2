@@ -23,6 +23,7 @@ router.get('/PAROIMPAR/:numero',(req,res)=> {
     } 
 });
 
+
 router.get('/alreves/:palabra', function(req, res) { 
     let cadenaAlreves = alreves(req.params.palabra);
 
@@ -66,6 +67,15 @@ function alreves(cadena){
 
     return resultado;
 }
+
+app.get('/potencia/:base', function(req, res) { 
+    let base = req.params.base;
+
+    res.json({ 
+        mensaje: Math.pow(base, 3)
+    })  
+})
+  
 
 
 export default router 

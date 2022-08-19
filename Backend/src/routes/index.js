@@ -77,5 +77,15 @@ app.get('/potencia/:base', function(req, res) {
 })
   
 
+app.get('/multiplicacion/:numero1/:numero2', function(req, res) { 
+    let numero1 = req.params.numero1;
+    let numero2 = req.params.numero2;
+
+    res.json({ 
+        resultado:numero1*numero2
+    })  
+})
+
+
 
 export default router 

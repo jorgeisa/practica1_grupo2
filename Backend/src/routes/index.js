@@ -17,12 +17,13 @@ router.get('/', (req, res)=>{
 router.get('/PAROIMPAR/:numero',(req,res)=> {
     var response = req.params.numero;
     if (!isNaN(response)){
-    var resultado = Verificar(response);
-    if (resultado == true){
-        res.json({Resultado: 'El numero es par'})
-    }else if (resultado == false) {
-        res.json({Resultado: 'El numero es impar'})
-    }}else{
+        var resultado = Verificar(response);
+        if (resultado == true){
+            res.json({Resultado: 'El numero es par'})
+        }else if (resultado == false) {
+            res.json({Resultado: 'El numero es impar'})
+        }
+    }else{
         res.json({Resultado: 'No es un numero'})
     }
 });
@@ -30,11 +31,12 @@ router.get('/PAROIMPAR/:numero',(req,res)=> {
 
 router.get('/alreves/:palabra', function(req, res) { 
     if (isNaN(req.params.palabra) ){
-    let cadenaAlreves = alreves(req.params.palabra);
-
-    res.json({ 
-        mensaje: cadenaAlreves
-    })  }else{
+        let cadenaAlreves = alreves(req.params.palabra);
+        
+        res.json({ 
+            mensaje: cadenaAlreves
+        })  
+    }else{
         res.json({mensaje: 'No es una palabra'})
     }
 })

@@ -14,6 +14,7 @@ router.get('/', (req, res)=>{
         })
 })
 
+// Endpoint PAR O IMPAR
 router.get('/PAROIMPAR/:numero',(req,res)=> {
     var response = req.params.numero;
     if (!isNaN(response)){
@@ -35,7 +36,11 @@ router.get('/PAROIMPAR/:numero',(req,res)=> {
     }
 });
 
+function Verificar(numero){
+    return (numero % 2) == 0;
+}
 
+// Endpoint palabra al reves
 router.get('/alreves/:palabra', function(req, res) { 
     if (isNaN(req.params.palabra) ){
         var response = req.params.palabra
@@ -55,10 +60,20 @@ router.get('/alreves/:palabra', function(req, res) {
     }
 })
 
-function Verificar(numero){
+function alreves(cadena){
+    var resultado = '';
+    var palindromo = 'false';
 
-        return (numero % 2) == 0;
+    for(let i = cadena.length -1; i>=0; --i){
+        resultado += cadena[i];
+    }
 
+    if(cadena == resultado){//
+        palindromo = true;
+        return [resultado,palindromo];
+    }else{
+        return [resultado,palindromo];
+    }
 }
 
 // Endpoint Fibonacci
@@ -77,7 +92,14 @@ router.get('/fibo/:numero', (req, res)=> {
     }
 })
 
-// FUncion Raiz
+// Funcion Fibonacci
+function fibonacci_func(numero){
+    if (numero <= 1) return numero
+
+    return fibonacci_func(numero-1) + fibonacci_func(numero - 2)
+}
+
+// Endpoint Raiz Cubica
 router.get('/raiz/:numero', function(req, res) { 
     if (!isNaN(req.params.numero) ){
         var response = req.params.numero
@@ -92,7 +114,6 @@ router.get('/raiz/:numero', function(req, res) {
     }
 })
 
-
 function raiz(numero){
     let resultado;
     let positivo = 'Numero positivo';
@@ -106,7 +127,7 @@ function raiz(numero){
     }
 }
 
-//Funcion division
+// Endpoint division
 router.get('/division/:numero1/:numero2', function(req, res) { 
     if (!isNaN(req.params.numero1) && !isNaN(req.params.numero2)){
         var response_1 = req.params.numero1
@@ -124,30 +145,7 @@ function div(n1,n2){
     return [n1/n2,n1%n2];
   }
 
-// Funcion Fibonacci
-function fibonacci_func(numero){
-    if (numero <= 1) return numero
-
-    return fibonacci_func(numero-1) + fibonacci_func(numero - 2)
-}
-
-
-function alreves(cadena){
-    var resultado = '';
-    var palindromo = 'false';
-
-    for(let i = cadena.length -1; i>=0; --i){
-        resultado += cadena[i];
-    }
-
-    if(cadena == resultado){//
-        palindromo = true;
-        return [resultado,palindromo];
-    }else{
-        return [resultado,palindromo];
-    }
-}
-
+// Endpoint Potencia Cubo
 router.get('/potencia/:base', function(req, res) { 
     let base = req.params.base;
     if (!isNaN(base) ){
@@ -165,7 +163,7 @@ router.get('/potencia/:base', function(req, res) {
     }
 })
 
-
+// Endpoint Multiplicacion
 router.get('/multiplicacion/:numero1/:numero2', function(req, res) { 
     let numero1 = req.params.numero1;
     let numero2 = req.params.numero2;

@@ -29,7 +29,7 @@ export default function Alreves() {
                             <center> <Form.Label style={{ color: 'white' }} column="lg" lg={10}>Funcion Alreves</Form.Label></center>
                             <Form.Control type="text" placeholder="Palabra" onChange={e=>setVal(e.target.value)} /> <br/>
                             <Button variant="info" onClick = {()=> (enviar())} > Enviar Palabra</Button>
-                            <center> <Form.Label style={{ color: 'white' }} column="lg" lg={10}>Solucion</Form.Label></center>
+                            <center> <Form.Label style={{ color: 'white' }} column="lg" lg={10}>Resultado</Form.Label></center>
                             <Form.Control type="text" placeholder="Palabra" value = {resultado} /> <br/>
                         </div>
                     </Col> 

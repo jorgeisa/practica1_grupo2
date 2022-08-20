@@ -17,12 +17,20 @@ router.get('/', (req, res)=>{
 router.get('/PAROIMPAR/:numero',(req,res)=> {
     var response = req.params.numero;
     if (!isNaN(response)){
-    var resultado = Verificar(response);
-    if (resultado == true){
-        res.json({Resultado: 'El numero es par'})
-    }else if (resultado == false) {
-        res.json({Resultado: 'El numero es impar'})
-    }}else{
+        var resultado = Verificar(response);
+        
+        if (resultado == true){
+
+            if (response < 0){res.json({Resultado: 'El numero ' + response + ' es par ' + 'y es negativo.'})
+            }else{ res.json({Resultado: 'El numero ' + response + ' es par ' + 'y es positivo.'})}
+        
+        }else if (resultado == false) {
+            
+            if(response < 0 ) { res.json({Resultado: 'El numero ' + response + ' es impar ' + 'y es negativo.'}) }
+            else{ res.json({Resultado: 'El numero ' + response + ' es impar ' + 'y es positivo.'}) }
+        
+        }
+    }else{
         res.json({Resultado: 'No es un numero'})
     }
 });
@@ -30,11 +38,19 @@ router.get('/PAROIMPAR/:numero',(req,res)=> {
 
 router.get('/alreves/:palabra', function(req, res) { 
     if (isNaN(req.params.palabra) ){
-    let cadenaAlreves = alreves(req.params.palabra);
+        var response = req.params.palabra
+        let cadenaAlreves = alreves(response);
 
-    res.json({ 
-        mensaje: cadenaAlreves
-    })  }else{
+        if(cadenaAlreves[1] == true){
+            res.json({ 
+                mensaje: 'Al reves es "' + cadenaAlreves[0] + '" y es palindroma.'
+            }) 
+        } else {
+            res.json({ 
+                mensaje: 'Al reves es "' + cadenaAlreves[0] + '" y no es palindroma.'
+            })
+        }
+    }else{
         res.json({mensaje: 'No es una palabra'})
     }
 })
@@ -64,11 +80,14 @@ router.get('/fibo/:numero', (req, res)=> {
 // FUncion Raiz
 router.get('/raiz/:numero', function(req, res) { 
     if (!isNaN(req.params.numero) ){
-    let result_raiz = raiz(req.params.numero);
+        var response = req.params.numero
+        let result_raiz = raiz(response);
 
-    res.json({ 
-        mensaje: result_raiz
-    })  }else{
+        res.json({ 
+            mensaje: result_raiz,
+            numeroIngresado: response
+        })  
+    }else{
         res.json({mensaje: 'No es un numero'})
     }
 })
@@ -90,10 +109,13 @@ function raiz(numero){
 //Funcion division
 router.get('/division/:numero1/:numero2', function(req, res) { 
     if (!isNaN(req.params.numero1) && !isNaN(req.params.numero2)){
-    let division = div(req.params.numero1,req.params.numero2);
-    res.json({ 
-        mensaje: division
-    })  }else{
+        var response_1 = req.params.numero1
+        var response_2 = req.params.numero2
+        let division = div(response_1,response_2);
+        res.json({ 
+            mensaje: 'La operación ' + response_1 + '/' + response_2 + ' es igual a ' + division[0] + ' con residuo ' + division[1]
+        })  
+    }else{
         res.json({mensaje: 'No es un numero'})
     }
 })
@@ -129,14 +151,16 @@ function alreves(cadena){
 router.get('/potencia/:base', function(req, res) { 
     let base = req.params.base;
     if (!isNaN(base) ){
-
-    if(base==0){
-        mensaje="Cuando la base es CERO el resultado es 0"
-    }else
-        mensaje= Math.pow(base, 3)
-    res.json({ 
-        mensaje: Math.pow(base, 3)
-    })  }else{
+        var _mensaje = ""
+        if(base==0){
+            _mensaje ="Cuando la base es CERO el resultado es 0"
+        }else{
+            _mensaje= Math.pow(base, 3) 
+        } 
+        res.json({ 
+            mensaje: _mensaje
+        })
+    }else{
         res.json({mensaje: 'No es un numero'})
     }
 })
@@ -146,16 +170,17 @@ router.get('/multiplicacion/:numero1/:numero2', function(req, res) {
     let numero1 = req.params.numero1;
     let numero2 = req.params.numero2;
     if (!isNaN(numero1) && !isNaN(numero2)){
-
-    if (numero1==0 || numero2==0) {
-        resultado="todo numero multiplicado por CERO es igual a 0";
-    } else
-        resultado=numero1*numero2;
-    
-    
-    res.json({ 
-        resultado:numero1*numero2
-    })  }else{
+        var _resultado = ""
+        if (numero1==0 || numero2==0) {
+            _resultado="todo numero multiplicado por CERO es igual a 0";
+        } else {
+            _resultado=numero1*numero2;
+        }       
+        
+        res.json({ 
+            resultado: _resultado
+        })  
+    }else{
         res.json({resultado: 'No es un numero'})
     }
 })

@@ -80,14 +80,24 @@ function alreves(cadena){
 router.get('/fibo/:numero', (req, res)=> {
     let numero = req.params.numero
     if (!isNaN(numero) ){
-    var fibonacci_numero = fibonacci_func(numero);
-    res.json(
-        {
-            Funcion: 'Fibonacci',
-            Numero: numero,
-            Fibonacci: fibonacci_numero
-        }
-    ) }else{
+        if(numero < 0 || numero > 35){ 
+            res.json(
+            {
+                Funcion: 'Fibonacci',
+                Numero: numero,
+                Fibonacci: 'El numero es no es valido (negativo o > 35)'
+            })  
+        } else{
+            var fibonacci_numero = fibonacci_func(numero);
+            res.json(
+                {
+                    Funcion: 'Fibonacci',
+                    Numero: numero,
+                    Fibonacci: fibonacci_numero
+                }
+            )
+        } 
+    }else{
         res.json({Fibonacci: 'No es un numero'})
     }
 })
@@ -103,8 +113,15 @@ function fibonacci_func(numero){
 router.get('/raiz/:numero', function(req, res) { 
     if (!isNaN(req.params.numero) ){
         var response = req.params.numero
-        let result_raiz = raiz(response);
 
+        if(response < 0){
+            res.json({ 
+                mensaje: 'Es un numero negativo!',
+                numeroIngresado: response
+            }) 
+        }
+
+        let result_raiz = raiz(response);
         res.json({ 
             mensaje: result_raiz,
             numeroIngresado: response
@@ -149,15 +166,17 @@ function div(n1,n2){
 router.get('/potencia/:base', function(req, res) { 
     let base = req.params.base;
     if (!isNaN(base) ){
+        if(base < 0){ 
+            res.json({mensaje: 'El numero es negativo!'}) 
+        }
+
         var _mensaje = ""
         if(base==0){
             _mensaje ="Cuando la base es CERO el resultado es 0"
         }else{
             _mensaje= Math.pow(base, 3) 
         } 
-        res.json({ 
-            mensaje: _mensaje
-        })
+        res.json({mensaje: _mensaje})
     }else{
         res.json({mensaje: 'No es un numero'})
     }

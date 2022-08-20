@@ -149,10 +149,14 @@ router.get('/division/:numero1/:numero2', function(req, res) {
     if (!isNaN(req.params.numero1) && !isNaN(req.params.numero2)){
         var response_1 = req.params.numero1
         var response_2 = req.params.numero2
-        let division = div(response_1,response_2);
-        res.json({ 
-            mensaje: 'La operación ' + response_1 + '/' + response_2 + ' es igual a ' + division[0] + ' con residuo ' + division[1]
-        })  
+        if(response_2 == 0){
+            res.json({ mensaje: 'Hotfix: Imposible dividir entre cero! '})
+        }else{
+            let division = div(response_1,response_2);
+            res.json({ 
+                mensaje: 'La operación ' + response_1 + '/' + response_2 + ' es igual a ' + division[0] + ' con residuo ' + division[1]
+            })  
+        }
     }else{
         res.json({mensaje: 'No es un numero'})
     }

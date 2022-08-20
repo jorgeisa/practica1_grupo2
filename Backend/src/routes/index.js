@@ -18,16 +18,17 @@ router.get('/PAROIMPAR/:numero',(req,res)=> {
     var response = req.params.numero;
     if (!isNaN(response)){
         var resultado = Verificar(response);
+        
         if (resultado == true){
-            res.json({
-                    Resultado: 'El numero es par',
-                    NumeroIngresado: response
-                })
+
+            if (response < 0){res.json({Resultado: 'El numero ' + response + ' es par ' + 'y es negativo.'})
+            }else{ res.json({Resultado: 'El numero ' + response + ' es par ' + 'y es positivo.'})}
+        
         }else if (resultado == false) {
-            res.json({
-                    Resultado: 'El numero es impar',
-                    NumeroIngresado: response
-                })
+            
+            if(response < 0 ) { res.json({Resultado: 'El numero ' + response + ' es impar ' + 'y es negativo.'}) }
+            else{ res.json({Resultado: 'El numero ' + response + ' es impar ' + 'y es positivo.'}) }
+        
         }
     }else{
         res.json({Resultado: 'No es un numero'})
@@ -40,10 +41,15 @@ router.get('/alreves/:palabra', function(req, res) {
         var response = req.params.palabra
         let cadenaAlreves = alreves(response);
 
-        res.json({ 
-            mensaje: cadenaAlreves,
-            palabraIngresada: response
-        })  
+        if(cadenaAlreves[1] == true){
+            res.json({ 
+                mensaje: 'Al reves es "' + cadenaAlreves[0] + '" y es palindroma.'
+            }) 
+        } else {
+            res.json({ 
+                mensaje: 'Al reves es "' + cadenaAlreves[0] + '" y no es palindroma.'
+            })
+        }
     }else{
         res.json({mensaje: 'No es una palabra'})
     }
@@ -107,9 +113,7 @@ router.get('/division/:numero1/:numero2', function(req, res) {
         var response_2 = req.params.numero2
         let division = div(response_1,response_2);
         res.json({ 
-            mensaje: division,
-            numero_1: response_1,
-            numero_2: response_2
+            mensaje: 'La operación ' + response_1 + '/' + response_2 + ' es igual a ' + division[0] + ' con residuo ' + division[1]
         })  
     }else{
         res.json({mensaje: 'No es un numero'})

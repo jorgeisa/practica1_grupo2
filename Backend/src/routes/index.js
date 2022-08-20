@@ -129,6 +129,11 @@ function alreves(cadena){
 router.get('/potencia/:base', function(req, res) { 
     let base = req.params.base;
     if (!isNaN(base) ){
+
+    if(base==0){
+        mensaje="Cuando la base es CERO el resultado es 0"
+    }else
+        mensaje= Math.pow(base, 3)
     res.json({ 
         mensaje: Math.pow(base, 3)
     })  }else{
@@ -141,6 +146,13 @@ router.get('/multiplicacion/:numero1/:numero2', function(req, res) {
     let numero1 = req.params.numero1;
     let numero2 = req.params.numero2;
     if (!isNaN(numero1) && !isNaN(numero2)){
+
+    if (numero1==0 || numero2==0) {
+        resultado="todo numero multiplicado por CERO es igual a 0";
+    } else
+        resultado=numero1*numero2;
+    
+    
     res.json({ 
         resultado:numero1*numero2
     })  }else{
